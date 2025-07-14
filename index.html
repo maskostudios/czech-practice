@@ -1,11 +1,122 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Hello Czech Class</title>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Czech Practice Launcher</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      display: flex;
+      height: 100vh;
+    }
+
+    .sidebar {
+      width: 250px;
+      background: #f0f0f0;
+      padding: 10px;
+      box-sizing: border-box;
+      overflow-y: auto;
+      border-right: 1px solid #ccc;
+    }
+
+    .sidebar button {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      background: #ddd;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .sidebar button:hover {
+      background: #ccc;
+    }
+
+    .content {
+      flex-grow: 1;
+      padding: 20px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .description {
+      white-space: pre-wrap;
+      font-size: 16px;
+    }
+
+    .start-button {
+      align-self: flex-end;
+      padding: 12px 20px;
+      font-size: 16px;
+      background: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .start-button:hover {
+      background: #0056b3;
+    }
+  </style>
 </head>
 <body>
-  <h1>Hello World!</h1>
-  <p>This is a demo page for Czech practice.</p>
+  <div class="sidebar">
+    <button onclick="selectExercise(0)">Pronouns Accusative</button>
+    <button onclick="selectExercise(1)">Verb Conjugation -at</button>
+    <button onclick="selectExercise(2)">Adjective Agreement</button>
+    <!-- Add more buttons here -->
+  </div>
+  <div class="content">
+    <div class="description" id="description">
+      Select an exercise on the left to see the theory and details here.
+    </div>
+    <button class="start-button" id="startBtn" onclick="startExercise()" disabled>
+      Start Exercise
+    </button>
+  </div>
+
+  <script>
+    const exercises = [
+      {
+        name: "Pronouns Accusative",
+        description: "This exercise will test your understanding of accusative pronouns (mě, tě, ho, ji...).\n\nYou will be shown questions where you must choose the correct form based on person and gender.",
+        link: "exercise1.html"
+      },
+      {
+        name: "Verb Conjugation -at",
+        description: "Practice conjugating regular -at verbs in the present tense.\n\nFocus on endings for each person (já, ty, on/ona...).",
+        link: "exercise2.html"
+      },
+      {
+        name: "Adjective Agreement",
+        description: "Match adjectives with the correct gender and case of the nouns they describe.\n\nThis will help reinforce agreement rules.",
+        link: "exercise3.html"
+      }
+    ];
+
+    let selectedExercise = null;
+
+    function selectExercise(index) {
+      selectedExercise = exercises[index];
+      document.getElementById("description").textContent = selectedExercise.description;
+      const btn = document.getElementById("startBtn");
+      btn.disabled = false;
+      btn.textContent = `Start "${selectedExercise.name}"`;
+    }
+
+    function startExercise() {
+      if (selectedExercise) {
+        window.location.href = selectedExercise.link;
+      }
+    }
+  </script>
 </body>
 </html>
